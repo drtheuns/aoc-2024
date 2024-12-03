@@ -28,7 +28,7 @@ end
 mul = "(mul)\\((\\d+),(\\d+)\\)"
 dont = "(don't)\\(\\)"
 do_ = "(do)\\(\\)"
-regex = Regex.compile!("(?:#{mul}|#{dont}|#{do_})")
+regex = Regex.compile!("#{mul}|#{dont}|#{do_}")
 
 Regex.scan(regex, content, capture: :all_but_first)
 |> Interpreter.interpret()
