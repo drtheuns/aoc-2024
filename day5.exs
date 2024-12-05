@@ -38,8 +38,6 @@ defmodule Impl do
       [int, right | acc]
     end
   end
-
-  def middle(ints), do: Enum.at(ints, div(length(ints), 2))
 end
 
 [unparsed_rules, unparsed_updates] = "day5_input" |> File.read!() |> String.split("\n\n")
@@ -55,11 +53,12 @@ rules =
   |> Enum.reduce({0, 0}, fn update, {p1, p2} ->
     ints = Parser.int_list(update)
     ordered = Impl.build_ordered(ints, rules)
+    middle = Enum.at(ordered, div(length(ordered), 2))
 
     if ordered == ints do
-      {p1 + Impl.middle(ints), p2}
+      {p1 + middle, p2}
     else
-      {p1, p2 + Impl.middle(ordered)}
+      {p1, p2 + middle}
     end
   end)
 
